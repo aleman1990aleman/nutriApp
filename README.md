@@ -7,6 +7,9 @@
 ### Integrantes: Ortiz Ortiz Yamileth Guadalupe,   Rodriguez Ignacio Alan Omar ###
 
 ![Texto alternativo](yami.ort.png) 
+![Texto alternativo](alan.rdrz.png) 
+
+
 
 
 
