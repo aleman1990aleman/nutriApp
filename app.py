@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
 app = Flask(__name__)
-app.secret_key = "clavexdffdd"
-
+app.secret_key = "1234567890"  
 USUARIOS_REGISTRADOS = {}
 
 
@@ -92,19 +91,6 @@ def registro():
         return redirect(url_for("login"))
 
     return render_template("registro.html")
-
-
-@app.route("/educacion")
-def educacion():
-    return render_template("Educacion.html")
-
-@app.route("/ajustes")
-def ajustes():
-    return render_template("ajustes.html")
-
-@app.route("/ayuda")
-def ayuda():
-    return render_template("ayuda.html")
 
 
 
