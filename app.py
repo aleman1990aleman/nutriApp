@@ -105,5 +105,9 @@ def tbm():
 def gct():
     return render_template("gct.html")
 
+@app.route('/pci')
+def pci():
+    return render_template("pci.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
