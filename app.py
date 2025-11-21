@@ -175,6 +175,7 @@ def pesoideal():
 def macros():
     proteinas = grasas = carbohidratos = None
 
+<<<<<<< HEAD
     if request.method == "POST":
         calorias = float(request.form.get("calorias"))
 
@@ -188,3 +189,11 @@ def macros():
         grasas=grasas,
         carbohidratos=carbohidratos
     )
+=======
+@app.route('/pci')
+def pci():
+    return render_template("pci.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+>>>>>>> 3da078f213887ad0ec44ea8a04c58e0fb9f0345d
