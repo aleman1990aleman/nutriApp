@@ -4,7 +4,6 @@
 {% block content %}
 <div class="container mt-5">
 
-    <!-- Mostrar mensajes flash (errores o éxito) -->
     {% with mensajes = get_flashed_messages(with_categories=True) %}
         {% if mensajes %}
             {% for categoria, mensaje in mensajes %}
@@ -16,55 +15,73 @@
     {% endwith %}
 
     <div class="row justify-content-center">
-        <div class="col-md-6"> <!-- Cambiado a col-md-6 para centrar mejor el card -->
+        <div class="col-md-6"> 
 
             <div class="card shadow-sm border-success">
                 <div class="card-body">
 
                     <h3 class="text-center mb-4 text-success fw-bold">Calculadora de TMB</h3>
 
-                    <!-- FORMULARIO INICIO -->
                     <form method="POST">
                         
-                        <!-- Edad -->
                         <div class="mb-3">
                             <label class="form-label">Edad</label>
                             <input type="number" class="form-control" name="edad" required>
                         </div>
 
-                        <!-- Peso -->
                         <div class="mb-3">
                             <label class="form-label">Peso (kg)</label>
                             <input type="number" step="0.01" class="form-control" name="peso" required>
                         </div>
 
-                        <!-- Altura -->
                         <div class="mb-3">
                             <label class="form-label">Altura (cm)</label>
                             <input type="number" step="0.01" class="form-control" name="altura" required>
                         </div>
 
-                        <!-- Sexo -->
                         <div class="mb-3">
                             <label class="form-label">Sexo</label>
                             <div class="d-flex gap-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="sexo" id="sexo_hombre" value="Hombre" required>
+                                    <input class="form-check-input" type="radio" name="genero" id="sexo_hombre" value="Hombre" required>
                                     <label class="form-check-label" for="sexo_hombre">Hombre</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="sexo" id="sexo_mujer" value="Mujer" required>
+                                    <input class="form-check-input" type="radio" name="genero" id="sexo_mujer" value="Mujer" required>
                                     <label class="form-check-label" for="sexo_mujer">Mujer</label>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Botón enviar -->
+                        <div class="mb-3">
+                            <label class="form-label">Actividad física</label>
+                            <select name="actividad" class="form-select" required>
+                                <option value="" disabled selected>Selecciona...</option>
+                                <option value="seden">Sedentario</option>
+                                <option value="ligera">Ligera</option>
+                                <option value="moderada">Moderada</option>
+                                <option value="alta">Alta</option>
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-success w-100 mt-3">
-                            Calcular TMB
+                            Calcular TMB y GET
                         </button>
                     </form>
-                    <!-- FORMULARIO FIN -->
+
+                    {% if tmb and get_total %}
+                    <hr class="my-4">
+
+                    <h5 class="text-center text-success fw-bold">Resultados</h5>
+
+                    <p class="mt-3">
+                        <strong>TMB (Tasa Metabólica Basal):</strong> {{ tmb }} calorías/día
+                    </p>
+
+                    <p>
+                        <strong>GET (Gasto Energético Total):</strong> {{ get_total }} calorías/día
+                    </p>
+                    {% endif %}
 
                 </div>
             </div>
