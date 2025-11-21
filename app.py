@@ -40,6 +40,8 @@ def login():
     return render_template('login.html')
 
 
+
+
 @app.route('/logout')
 def logout():
     session.clear()
@@ -86,6 +88,8 @@ def registro():
             "nivel_experiencia": nivel_experiencia,
             "password": password
         }
+
+
 
         flash("Registro exitoso. Ahora puedes iniciar sesión.", "success")
         return redirect(url_for("login"))
@@ -190,4 +194,5 @@ def macros():
     )
 
 if __name__ == '__main__':
+    
     app.run(debug=True)
