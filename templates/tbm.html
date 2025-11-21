@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Calculadora TMB{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Mostrar mensajes flash (errores o éxito) -->
+    {% with mensajes = get_flashed_messages(with_categories=True) %}
+        {% if mensajes %}
+            {% for categoria, mensaje in mensajes %}
+                <div class="alert alert-{{ 'success' if categoria=='success' else 'danger' }} text-center">
+                    {{ mensaje }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-6"> <!-- Cambiado a col-md-6 para centrar mejor el card -->
+
+            <div class="card shadow-sm border-success">
+                <div class="card-body">
+
+                    <h3 class="text-center mb-4 text-success fw-bold">Calculadora de TMB</h3>
+
+                    <!-- FORMULARIO INICIO -->
+                    <form method="POST">
+                        
+                        <!-- Edad -->
+                        <div class="mb-3">
+                            <label class="form-label">Edad</label>
+                            <input type="number" class="form-control" name="edad" required>
+                        </div>
+
+                        <!-- Peso -->
+                        <div class="mb-3">
+                            <label class="form-label">Peso (kg)</label>
+                            <input type="number" step="0.01" class="form-control" name="peso" required>
+                        </div>
+
+                        <!-- Altura -->
+                        <div class="mb-3">
+                            <label class="form-label">Altura (cm)</label>
+                            <input type="number" step="0.01" class="form-control" name="altura" required>
+                        </div>
+
+                        <!-- Sexo -->
+                        <div class="mb-3">
+                            <label class="form-label">Sexo</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sexo" id="sexo_hombre" value="Hombre" required>
+                                    <label class="form-check-label" for="sexo_hombre">Hombre</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sexo" id="sexo_mujer" value="Mujer" required>
+                                    <label class="form-check-label" for="sexo_mujer">Mujer</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botón enviar -->
+                        <button type="submit" class="btn btn-success w-100 mt-3">
+                            Calcular TMB
+                        </button>
+                    </form>
+                    <!-- FORMULARIO FIN -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

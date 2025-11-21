@@ -92,7 +92,18 @@ def registro():
 
     return render_template("registro.html")
 
+@app.route('/imc')
+def imc():
+    return render_template("imc.html")
 
+@app.route('/tbm')
+def tbm():
+    return render_template("tbm.html")
+
+
+@app.route('/gct')
+def gct():
+    return render_template("gct.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
