@@ -11,6 +11,10 @@
         </p>
         <hr class="my-4 border-success">
 
+        <p class="text-dark">Regístrate o inicia sesión para comenzar a usar la aplicación.</p>
+
+        <a class="btn btn-success btn-lg me-2" href="{{ url_for('registro') }}" role="button">Regístrate</a>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Iniciar Sesión</a>
     </div>
 </div>
 
@@ -19,14 +23,12 @@
 <div class="container mt-5 mb-5">
     <h2 class="text-center text-success fw-bold mb-4">¿Por qué usar NutriApp?</h2>
 
-
-
     <div class="row g-4">
         
         <div class="col-md-4">
             <div class="card h-100 shadow border-success">
                 <img src="{{ url_for('static', filename='img/card1.jpg') }}" 
-                        class="card-img-top" alt="Control de calorías">
+                     class="card-img-top" alt="Control de calorías">
                 <div class="card-body bg-light">
                     <h5 class="card-title text-success fw-bold">Control preciso de tu dieta</h5>
                     <p class="card-text text-secondary">
@@ -36,11 +38,10 @@
             </div>
         </div>
 
-
         <div class="col-md-4">
             <div class="card h-100 shadow border-success">
                 <img src="{{ url_for('static', filename='img/card2.jpg') }}" 
-                        class="card-img-top" alt="Progreso">
+                     class="card-img-top" alt="Progreso">
                 <div class="card-body bg-light">
                     <h5 class="card-title text-success fw-bold">Sigue tu progreso</h5>
                     <p class="card-text text-secondary">
@@ -50,12 +51,10 @@
             </div>
         </div>
 
-
-
         <div class="col-md-4">
             <div class="card h-100 shadow border-success">
                 <img src="{{ url_for('static', filename='img/card3.jpg') }}" 
-                        class="card-img-top" alt="Objetivos">
+                     class="card-img-top" alt="Objetivos">
                 <div class="card-body bg-light">
                     <h5 class="card-title text-success fw-bold">Metas claras y alcanzables</h5>
                     <p class="card-text text-secondary">
@@ -65,10 +64,7 @@
             </div>
         </div>
 
-
-
     </div>
 </div>
-
 
 {% endblock %}

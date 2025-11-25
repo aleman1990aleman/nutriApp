@@ -40,8 +40,6 @@ def login():
     return render_template('login.html')
 
 
-
-
 @app.route('/logout')
 def logout():
     session.clear()
@@ -89,110 +87,34 @@ def registro():
             "password": password
         }
 
-
-
         flash("Registro exitoso. Ahora puedes iniciar sesión.", "success")
         return redirect(url_for("login"))
 
     return render_template("registro.html")
 
-@app.route("/tasa", methods=["GET", "POST"])
-def tasa():
-    tmb = None
-    get_total = None
-
-    if request.method == "POST":
-        peso = float(request.form.get("peso"))
-        altura = float(request.form.get("altura"))   
-        edad = float(request.form.get("edad"))
-        genero = request.form.get("genero")
-        actividad = request.form.get("actividad")
-
-        if genero == "Hombre":
-            tmb = (10 * peso) + (6.25 * altura) - (5 * edad) + 5
-        else:
-            tmb = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
-
-        factores = {
-            "seden": 1.2,
-            "ligera": 1.375,
-            "moderada": 1.55,
-            "alta": 1.725,
-        }
-
-        get_total = tmb * factores.get(actividad, 1)
-
-        tmb = round(tmb, 2)
-        get_total = round(get_total, 2)
-
-    return render_template("calculartmb.html", tmb=tmb, get_total=get_total)
-
-
-@app.route("/imc", methods=["GET", "POST"])
+@app.route('/imc')
 def imc():
-    imc = None
-    categoria = None
+    return render_template("imc.html")
 
-    if request.method == "POST":
-        peso = float(request.form.get("peso"))
-        altura = float(request.form.get("altura")) / 100  
-
-        imc_valor = peso / (altura ** 2)
-        imc = round(imc_valor, 2)
-
-        if imc < 18.5:
-            categoria = "Bajo peso"
-        elif imc < 25:
-            categoria = "Peso normal"
-        elif imc < 30:
-            categoria = "Sobrepeso"
-        elif imc < 35:
-            categoria = "Obesidad grado I"
-        elif imc < 40:
-            categoria = "Obesidad grado II"
-        else:
-            categoria = "Obesidad grado III (mórbida)"
-
-    return render_template("calcuimc.html", imc=imc, categoria=categoria)
-
-@app.route("/pesoideal", methods=["GET", "POST"])
-def pesoideal():
-    resultado = None
-
-    if request.method == "POST":
-        altura = float(request.form.get("altura"))  
-        genero = request.form.get("genero")
-
-        altura_pulg = altura / 2.54  
-
-        if genero == "Hombre":
-            resultado = 50 + 2.3 * (altura_pulg - 60)
-        else:
-            resultado = 45.5 + 2.3 * (altura_pulg - 60)
-
-        resultado = round(resultado, 2)
-
-    return render_template("pesoideal.html", resultado=resultado)
+@app.route('/tbm')
+def tbm():
+    return render_template("tbm.html")
 
 
-@app.route("/macros", methods=["GET", "POST"])
-def macros():
-    proteinas = grasas = carbohidratos = None
+@app.route('/gct')
+def gct():
+    return render_template("gct.html")
 
-    if request.method == "POST":
-        calorias = float(request.form.get("calorias"))
+@app.route('/pci')
+def pci():
+    return render_template("pci.html")
 
-        proteinas = round((calorias * 0.30) / 4, 1)
-        grasas = round((calorias * 0.25) / 9, 1)
-        carbohidratos = round((calorias * 0.45) / 4, 1)
 
-    return render_template(
-        "macros.html",
-        proteinas=proteinas,
-        grasas=grasas,
-        carbohidratos=carbohidratos
-    )
+@app.route('/busqueda')
+def busqueda():
+    return render_template("busqueda.html")
 
-if __name__ == '__main__':
-    
+
+
+if __name__ == "__main__":
     app.run(debug=True)
