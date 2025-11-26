@@ -114,6 +114,10 @@ def pci():
 def busqueda():
     return render_template("busqueda.html")
 
+@app.route('/educacion')
+def educacion():
+    return render_template("educacion.html")
+
 
 
 if __name__ == "__main__":
