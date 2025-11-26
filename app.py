@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+import requests
 
 app = Flask(__name__)
 app.secret_key = "1234567890"  
@@ -118,7 +119,39 @@ def busqueda():
 def educacion():
     return render_template("educacion.html")
 
+@app.route("/analizador_recetas", methods=["GET", "POST"])
+def analizador_recetas():
+    nutrientes = None
 
+    if request.method == "POST":
+        receta = request.form.get("receta")
+
+        if not receta:
+            flash("Por favor ingresa una receta.", "error")
+            return render_template("analizador_recetas.html")
+
+        API_KEY = "ao0tNQgF9iwaVSi3tV2ms7odgQ6e2D2Wl0q4bnmS"
+        url = f"https://api.nal.usda.gov/fdc/v1/foods/search?api_key={API_KEY}"
+
+        payload = {
+            "query": receta,
+            "dataType": ["SR Legacy", "Foundation", "Branded"],
+            "pageSize": 5
+        }
+
+        try:
+            respuesta = requests.post(url, json=payload)
+            data = respuesta.json()
+
+            if "foods" not in data or len(data["foods"]) == 0:
+                flash("No se encontraron nutrientes para esta receta.", "error")
+            else:
+                nutrientes = data["foods"][0].get("foodNutrients", [])
+        except Exception as e:
+            flash("Error al conectar con la API.", "error")
+            print("Error:", e)
+
+    return render_template("analizador_recetas.html", nutrientes=nutrientes)
 
 if __name__ == "__main__":
     app.run(debug=True)
